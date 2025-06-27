@@ -132,4 +132,33 @@
 
   function animate() {
     angle += 8;
-    player.style.transform = `transla
+    player.style.transform = `translateX(-50%) rotate(${angle}deg)`;
+
+    velocityY += gravity;
+    playerTop += velocityY;
+    player.style.top = `${playerTop}px`;
+    player.style.left = `${playerLeft}px`;
+
+    for (let wall of walls) {
+      if (isColliding(player, wall)) {
+       resetGameButKeepScore();
+      
+      }
+    }
+
+    if (playerTop > window.innerHeight - 100) {
+      score++;
+      updateScore();
+  resetGameButKeepScore();
+     
+    }
+
+    requestAnimationFrame(animate);
+  }
+
+
+  animate();
+</script>
+
+</body>
+</html>
